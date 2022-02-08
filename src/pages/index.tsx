@@ -169,11 +169,15 @@ export default function _({ theme: _theme }: Props) {
     const [theme, setTheme] = useState(_theme)
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setPrimary(primary => primary.rotate(1))
-            setSecondary(secondary => secondary.rotate(1))
-        }, 100 * speed)
-        return () => clearInterval(interval)
+        const w = window.screen.width * window.devicePixelRatio
+
+        if (w >= 1024) {
+            const interval = setInterval(() => {
+                setPrimary(primary => primary.rotate(1))
+                setSecondary(secondary => secondary.rotate(1))
+            }, 100 * speed)
+            return () => clearInterval(interval)
+        }
     }, [])
 
     useEffect(() => {
