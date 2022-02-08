@@ -478,10 +478,10 @@ export default function _({ theme: _theme }: Props) {
                                                         <h3 className='text-2xl font-poppins font-bold mb-8 mx-auto lg:mx-0'>
                                                             {title}
                                                         </h3>
-                                                        <p className='font-light text-[#a7aab7] mb-7'>
+                                                        <p className='font-light text-[#a7aab7] mb-7 text-center lg:text-left'>
                                                             {description}
                                                         </p>
-                                                        <ul className='mb-8 flex gap-x-6'>
+                                                        <ul className='mb-8 flex gap-x-6 mx-auto lg:mx-0'>
                                                             {techs.map(tech => (
                                                                 <li
                                                                     key={tech}
@@ -492,7 +492,7 @@ export default function _({ theme: _theme }: Props) {
                                                             ))}
                                                         </ul>
                                                         {theme === 'light' ? (
-                                                            <Neumorph>
+                                                            <Neumorph className='mx-auto lg:mx-0'>
                                                                 <Link href='#/' passHref>
                                                                     <a className='flex gap-x-4 px-8 py-3'>
                                                                         <SvgLink className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
@@ -506,6 +506,7 @@ export default function _({ theme: _theme }: Props) {
                                                                 gradient='var(--gradient-purple-from),var(--gradient-purple-to)'
                                                                 duration={index % 2 === 0 ? 15 : undefined}
                                                                 rotateNegative={index % 2 === 0}
+                                                                className='mx-auto lg:mx-0'
                                                             >
                                                                 <SvgLink className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                                 <span>Visualizar</span>
