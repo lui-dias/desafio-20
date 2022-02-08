@@ -492,7 +492,7 @@ export default function _({ theme: _theme }: Props) {
                                                             ))}
                                                         </ul>
                                                         {theme === 'light' ? (
-                                                            <Neumorph className='mx-auto lg:mx-0'>
+                                                            <Neumorph className='mx-auto lg:mx-0 w-full lg:w-auto max-w-[250px] flex justify-center'>
                                                                 <Link href='#/' passHref>
                                                                     <a className='flex gap-x-4 px-8 py-3'>
                                                                         <SvgLink className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
@@ -506,7 +506,7 @@ export default function _({ theme: _theme }: Props) {
                                                                 gradient='var(--gradient-purple-from),var(--gradient-purple-to)'
                                                                 duration={index % 2 === 0 ? 15 : undefined}
                                                                 rotateNegative={index % 2 === 0}
-                                                                className='mx-auto lg:mx-0'
+                                                                className='mx-auto lg:mx-0 w-full lg:w-auto max-w-[250px] flex justify-center'
                                                             >
                                                                 <SvgLink className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                                 <span>Visualizar</span>
