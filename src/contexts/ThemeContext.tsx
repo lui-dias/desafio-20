@@ -7,14 +7,19 @@ type Context = {
     setTheme: Dispatch<SetStateAction<Theme>>
 }
 
+export const value: Context = {
+    theme: 'light',
+    setTheme: () => {},
+}
+
 type Props = {
     children: React.ReactNode
 }
 
-export const ThemeContext = createContext({} as Context)
+export const ThemeContext = createContext(value)
 
 export function ThemeContextProvider({ children }: Props) {
-    const [theme, setTheme] = useState<Theme>('light')
+    const [theme, setTheme] = useState<Theme>(value.theme)
 
     return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
 }

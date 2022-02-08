@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import Color from 'color'
 import dayjs, { Dayjs } from 'dayjs'
@@ -22,10 +22,15 @@ import { Email } from '../components/svg/Email'
 import { SvgLink } from '../components/svg/SvgLink'
 import { LogoFooter } from '../components/svg/LogoFooter'
 import { Neumorph } from '../components/Neumorph'
-import { Theme, ThemeContext } from '../contexts/ThemeContext'
+import { Theme, ThemeContext, value } from '../contexts/ThemeContext'
+import { NextPageContext } from 'next'
+import nookies from 'nookies'
 
 const speed = 0.9
-const pressedKeys = []
+
+type Props = {
+    theme: Theme
+}
 
 type Experiencie = {
     where: string
@@ -148,6 +153,14 @@ const projects: Project[] = [
     },
 ]
 
+export async function getServerSideProps(ctx: NextPageContext) {
+    const cookies = nookies.get(ctx)
+    value.theme = (cookies.theme || 'light') as Theme
+
+    return {
+        props: {},
+    }
+}
 export default function _() {
     const [primary, setPrimary] = useState(Color('#FF1CF7'))
     const [secondary, setSecondary] = useState(Color('#00F0FF'))
@@ -176,7 +189,7 @@ export default function _() {
     }, [setTheme])
 
     useEffect(() => {
-        const theme = localStorage.getItem('theme') || ''
+        const theme = nookies.get(null).theme || 'light'
 
         if (theme !== 'light' && theme !== 'dark') {
             setTheme('light')
@@ -186,7 +199,9 @@ export default function _() {
     }, [setTheme])
 
     useEffect(() => {
-        localStorage.setItem('theme', theme)
+        nookies.set(null, 'theme', theme, {
+            maxAge: 31536000,
+        })
     }, [theme])
 
     return (
