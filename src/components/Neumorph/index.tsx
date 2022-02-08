@@ -3,6 +3,7 @@ import styled from 'styled-components'
 type CustomStyle = {
     fillSvg?: boolean
     disableClickEffect?: boolean
+    disablePressEffect?: boolean
 }
 
 const clickEffect = (fillSvg: boolean) => `
@@ -12,6 +13,14 @@ const clickEffect = (fillSvg: boolean) => `
 
     svg {
         ${fillSvg && 'fill: #acb2c8;'}
+    }
+}
+`
+
+const pressEffect = () => `
+:active {
+    > * {
+        transform: translateY(2px);
     }
 }
 `
@@ -28,10 +37,5 @@ export const Neumorph = styled.div<CustomStyle>`
     }
 
     ${props => !props.disableClickEffect && clickEffect(!!props.fillSvg)}
-
-    :active {
-        > * {
-            transform: translateY(2px);
-        }
-    }
+    ${props => !props.disablePressEffect && pressEffect()}
 `

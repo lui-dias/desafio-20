@@ -309,7 +309,7 @@ export default function _({ theme: _theme }: Props) {
                     <section className='dark:bg-_dark-200'>
                         <div className='container mx-auto flex flex-col lg:flex-row justify-between mt-20 md:mt-60 px-8 md:px-24 py-24'>
                             {theme === 'light' ? (
-                                <Neumorph className='w-full max-w-[350px] h-[350px] mx-auto lg:mx-0'>
+                                <Neumorph className='w-full max-w-[350px] h-[350px] mx-auto lg:mx-0' disableClickEffect disablePressEffect>
                                     <CustomImage
                                         src='https://via.placeholder.com/350x350'
                                         alt='Me'
@@ -333,7 +333,7 @@ export default function _({ theme: _theme }: Props) {
                                     Guarantã, Brasil
                                 </span>
 
-                                <p className='mb-10 font-light dark:text-_gray-light text-[#a7aab7] leading-[2] mx-auto lg:mx-0'>
+                                <p className='mb-10 font-light dark:text-_gray-light text-[#a7aab7] leading-[2] mx-auto lg:mx-0 text-center lg:text-left'>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id
                                     egestas dui. Nullam finibus aliquam enim quis faucibus. Aenean ac commodo
                                     dolor, nec bibendum velit.
@@ -439,7 +439,7 @@ export default function _({ theme: _theme }: Props) {
                                         ({ img, title, description, link, techs, github }, index) => (
                                             <li key={title}>
                                                 {theme === 'light' ? (
-                                                    <Neumorph className='max-w-[530px] h-[200px]'>
+                                                    <Neumorph className='max-w-[530px] h-[200px]' disableClickEffect disablePressEffect>
                                                         <CustomImage
                                                             src={img}
                                                             alt={title}
@@ -454,8 +454,8 @@ export default function _({ theme: _theme }: Props) {
                                                     />
                                                 )}
 
-                                                <div className='flex flex-col items-start mt-10 max-w-[75%]'>
-                                                    <h3 className='text-2xl font-poppins font-bold mb-8'>
+                                                <div className='flex flex-col items-start mt-10 max-w-[75%] mx-auto lg:mx-0'>
+                                                    <h3 className='text-2xl font-poppins font-bold mb-8 mx-auto lg:mx-0'>
                                                         {title}
                                                     </h3>
                                                     <p className='font-light text-[#a7aab7] mb-7'>

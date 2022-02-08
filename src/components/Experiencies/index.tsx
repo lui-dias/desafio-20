@@ -82,7 +82,7 @@ export function ExperienciesList({ experiencies, theme }: Props) {
     return (
         <div className='flex flex-col lg:flex-row gap-y-12'>
             {theme === 'light' ? (
-                <Neumorph disableClickEffect>
+                <Neumorph disableClickEffect disablePressEffect>
                     <Nav
                         experiencies={experiencies}
                         experiencieIndex={experiencieIndex}
