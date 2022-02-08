@@ -1,7 +1,6 @@
 import { Dayjs } from 'dayjs'
-import { memo, useContext, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
-import { ThemeContext } from '../../contexts/ThemeContext'
 import { Neumorph } from '../Neumorph'
 
 type Experiencie = {
@@ -16,6 +15,7 @@ type Experiencie = {
 
 type Props = {
     experiencies: Experiencie[]
+    theme: 'light' | 'dark'
 }
 
 type UlProps = {
@@ -75,13 +75,9 @@ function Nav({ experiencies, experiencieIndex, setExperiencieIndex }: NavProps) 
     )
 }
 
-export default memo(Nav)
-
-export const ExperienciesList = memo(function ExperienciesList({ experiencies }: Props) {
+export function ExperienciesList({ experiencies, theme }: Props) {
     const [experiencieIndex, setExperiencieIndex] = useState(0)
     const actualExperiencie = experiencies[experiencieIndex]
-
-    const { theme } = useContext(ThemeContext)
 
     return (
         <div className='flex flex-col lg:flex-row gap-y-12'>
@@ -119,4 +115,4 @@ export const ExperienciesList = memo(function ExperienciesList({ experiencies }:
             </div>
         </div>
     )
-})
+}

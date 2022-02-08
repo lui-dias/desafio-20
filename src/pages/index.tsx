@@ -1,8 +1,10 @@
+import { NextPageContext } from 'next'
 import Link from 'next/link'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Color from 'color'
 import dayjs, { Dayjs } from 'dayjs'
+import nookies from 'nookies'
 
 import { Looper } from '../components/Looper'
 import { GradientButton } from '../components/GradientButton'
@@ -22,14 +24,11 @@ import { Email } from '../components/svg/Email'
 import { SvgLink } from '../components/svg/SvgLink'
 import { LogoFooter } from '../components/svg/LogoFooter'
 import { Neumorph } from '../components/Neumorph'
-import { Theme, ThemeContext, value } from '../contexts/ThemeContext'
-import { NextPageContext } from 'next'
-import nookies from 'nookies'
 
 const speed = 0.9
 
 type Props = {
-    theme: Theme
+    theme: 'light' | 'dark'
 }
 
 type Experiencie = {
@@ -155,17 +154,18 @@ const projects: Project[] = [
 
 export async function getServerSideProps(ctx: NextPageContext) {
     const cookies = nookies.get(ctx)
-    value.theme = (cookies.theme || 'light') as Theme
 
     return {
-        props: {},
+        props: {
+            theme: cookies.theme || 'light',
+        },
     }
 }
-export default function _() {
+
+export default function _({ theme: _theme }: Props) {
     const [primary, setPrimary] = useState(Color('#FF1CF7'))
     const [secondary, setSecondary] = useState(Color('#00F0FF'))
-
-    const { theme, setTheme } = useContext(ThemeContext)
+    const [theme, setTheme] = useState(_theme)
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -425,7 +425,7 @@ export default function _() {
                         <div className='container mx-auto py-24 px-8 md:px-24'>
                             <h2 className='uppercase mb-7 text-[#878995] dark:text-_light'>Experiência</h2>
 
-                            <ExperienciesList experiencies={experiencies} />
+                            <ExperienciesList experiencies={experiencies} theme={theme} />
                         </div>
                     </section>
 
