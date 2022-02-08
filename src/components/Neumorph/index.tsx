@@ -28,4 +28,10 @@ export const Neumorph = styled.div<CustomStyle>`
     }
 
     ${props => !props.disableClickEffect && clickEffect(!!props.fillSvg)}
+
+    :active {
+        > * {
+            transform: translateY(2px);
+        }
+    }
 `
