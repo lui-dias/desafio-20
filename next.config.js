@@ -10,4 +10,8 @@ module.exports = {
     experimental: {
         styledComponents: true,
     },
+    i18n: {
+        locales: ['pt-BR'],
+        defaultLocale: 'pt-BR',
+    },
 }
