@@ -9,7 +9,7 @@ type Props = React.SVGProps<SVGSVGElement> & {
 // #FF1CF7
 // #00F0FF
 
-const speed = 0.02
+const speed = 0.025
 const delta = 20
 const delay = 85
 const data = Object.fromEntries([...Array(69)].map((_, i) => [i.toString(), { increment: true, n: 0 }]))
