@@ -29,13 +29,17 @@ export const Neumorph = styled.div<CustomStyle>`
     user-select: none;
     border-radius: 8px;
     background: #f0f4f6;
-    box-shadow: 4px 4px 5px #c7cacc, -4px -4px 5px #ffffff;
+    box-shadow: 2px 2px 5px #c7cacc, -2px -2px 5px #f5f5f5;
     color: #acb2c8;
-
+    
     svg {
         stroke: #acb2c8;
     }
-
+    
     ${props => !props.disableClickEffect && clickEffect(!!props.fillSvg)}
     ${props => !props.disablePressEffect && pressEffect()}
+    
+    @media (min-width: 1024px) {
+        box-shadow: 4px 4px 5px #c7cacc, -4px -4px 5px #ffffff;
+    }
 `
