@@ -474,7 +474,7 @@ export default function _({ theme: _theme }: Props) {
                                                         />
                                                     )}
 
-                                                    <div className='flex flex-col items-start mt-10 max-w-[75%] mx-auto lg:mx-0'>
+                                                    <div className='flex flex-col items-start mt-10 mx-auto lg:mx-0'>
                                                         <h3 className='text-2xl font-poppins font-bold mb-8 mx-auto lg:mx-0'>
                                                             {title}
                                                         </h3>
