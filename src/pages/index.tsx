@@ -492,9 +492,9 @@ export default function _({ theme: _theme }: Props) {
                                                             ))}
                                                         </ul>
                                                         {theme === 'light' ? (
-                                                            <Neumorph className='mx-auto lg:mx-0 w-full lg:w-auto max-w-[250px] flex justify-center'>
+                                                            <Neumorph className='mx-auto lg:mx-0 w-full lg:w-auto max-w-[250px]'>
                                                                 <Link href='#/' passHref>
-                                                                    <a className='flex gap-x-4 px-8 py-3'>
+                                                                    <a className='flex gap-x-4 px-8 py-3 w-full justify-center'>
                                                                         <SvgLink className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                                         <span>Visualizar</span>
                                                                     </a>
