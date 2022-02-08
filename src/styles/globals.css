@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --blue: #00d2df;
+        --dark: #121212;
+        --dark-200: #151515;
+        --gray-light: #c4c4c4;
+        --light: #ffffff;
+
+        --gradient-pink-from: #d24074;
+        --gradient-pink-to: #6518b4;
+        --gradient-purple-from: #9358f7;
+        --gradient-purple-to: #10d7e2;
+    }
+
+    svg * {
+        width: 100%;
+        height: 100%;
+    }
+}
