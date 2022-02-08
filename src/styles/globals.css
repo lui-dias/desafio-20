@@ -16,6 +16,10 @@
         --gradient-purple-to: #10d7e2;
     }
 
+    html {
+        scroll-behavior: smooth;
+    }
+
     svg * {
         width: 100%;
         height: 100%;

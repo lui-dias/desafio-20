@@ -222,17 +222,17 @@ export default function _({ theme: _theme }: Props) {
                                 </a>
                             </li>
                             <li>
-                                <a href='#/' className='py-11 px-8'>
+                                <a href='#sobre-mim' className='py-11 px-8'>
                                     Sobre mim
                                 </a>
                             </li>
                             <li>
-                                <a href='#/' className='py-11 px-8'>
+                                <a href='#experiencia' className='py-11 px-8'>
                                     Experiência
                                 </a>
                             </li>
                             <li>
-                                <a href='#/' className='py-11 px-8'>
+                                <a href='#projetos' className='py-11 px-8'>
                                     Projetos
                                 </a>
                             </li>
@@ -306,7 +306,7 @@ export default function _({ theme: _theme }: Props) {
                         </div>
                     </section>
 
-                    <section className='dark:bg-_dark-200'>
+                    <section id='sobre-mim' className='dark:bg-_dark-200'>
                         <div className='container mx-auto flex flex-col lg:flex-row justify-between mt-20 md:mt-60 px-8 md:px-24 py-24'>
                             {theme === 'light' ? (
                                 <Neumorph className='w-full max-w-[350px] h-[350px] mx-auto lg:mx-0' disableClickEffect disablePressEffect>
@@ -421,7 +421,7 @@ export default function _({ theme: _theme }: Props) {
                         </div>
                     </section>
 
-                    <section>
+                    <section id='experiencia'>
                         <div className='container mx-auto py-24 px-8 md:px-24'>
                             <h2 className='uppercase mb-7 text-[#878995] dark:text-_light'>Experiência</h2>
 
@@ -429,7 +429,7 @@ export default function _({ theme: _theme }: Props) {
                         </div>
                     </section>
 
-                    <section className='dark:bg-_dark-200'>
+                    <section id='projetos' className='dark:bg-_dark-200'>
                         <div className='container mx-auto px-8 py-24 md:px-24'>
                             <h2 className='uppercase mb-8 text-[#878995]'>Projetos</h2>
 
