@@ -263,7 +263,17 @@ export default function _({ theme: _theme }: Props) {
                             <div className='flex flex-col gap-y-3 container mx-auto md:mt-20 py-24 px-8 md:px-24'>
                                 <span
                                     className='text-xl uppercase text-center lg:text-left text-[#979aa5] dark:text-_light'
-                                    onClick={() => alert(window.screen.width * window.devicePixelRatio)}
+                                    onClick={() =>
+                                        alert(
+                                            Math.max(
+                                                document.body.scrollWidth,
+                                                document.documentElement.scrollWidth,
+                                                document.body.offsetWidth,
+                                                document.documentElement.offsetWidth,
+                                                document.documentElement.clientWidth
+                                            )
+                                        )
+                                    }
                                 >
                                     Olá, eu sou
                                 </span>
