@@ -11,7 +11,7 @@ type Props = {
 
 export function BottomMenu({ theme, setTheme }: Props) {
     return (
-        <div className='menu fixed w-screen h-[5vh] bg-[#e6e9ed] dark:bg-_dark-200 top-[calc(100%-5vh)] z-50 rounded-t-lg'>
+        <div className='menu fixed w-screen h-[7vh] bg-[#e6e9ed] dark:bg-_dark-200 top-[calc(100%-7vh)] z-50 rounded-t-lg lg:hidden'>
             <ul className='flex justify-around items-center w-full h-full px-4'>
                 <li onClick={() => setTheme(theme => (theme === 'light' ? 'dark' : 'light'))}>
                     {theme === 'light' ? (
