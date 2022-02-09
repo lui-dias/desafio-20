@@ -25,6 +25,7 @@ import { Email } from '../components/svg/Email'
 import { SvgLink } from '../components/svg/SvgLink'
 import { LogoFooter } from '../components/svg/LogoFooter'
 import { Neumorph } from '../components/Neumorph'
+import { BottomMenu } from '../components/BottomMenu'
 
 const speed = 0.9
 
@@ -213,6 +214,7 @@ export default function _({ theme: _theme }: Props) {
         <>
             <NextSeo title='Desafio 20' description='Um lindo site feito para o desafio 20 do codelândia' />
             <div className={theme}>
+                <BottomMenu theme={theme} setTheme={setTheme} />
                 <div className='bg-gradient-to-t from-[#f7f8fa] to-[#e6e9ed] dark:from-_dark dark:to-_dark font-inter dark:text-_light flex flex-col min-h-screen overflow-hidden'>
                     <header className='container flex justify-center lg:justify-between mx-auto font-medium md:px-24'>
                         <a
@@ -274,7 +276,7 @@ export default function _({ theme: _theme }: Props) {
                                             <Neumorph>
                                                 <a
                                                     href='#/'
-                                                    className='flex items-center gap-x-4 px-8 py-2 w-full justify-center max-w-[275px] lg:w-auto'
+                                                    className='flex items-center gap-x-4 px-8 py-2 justify-center min-w-[275px] lg:w-auto'
                                                 >
                                                     <LinkedIn className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                     <span>LinkedIn</span>
@@ -283,7 +285,7 @@ export default function _({ theme: _theme }: Props) {
                                             <Neumorph>
                                                 <a
                                                     href='#/'
-                                                    className='flex items-center gap-x-4 px-8 py-2 w-full justify-center max-w-[275px] lg:w-auto'
+                                                    className='flex items-center gap-x-4 px-8 py-2 justify-center min-w-[275px] lg:w-auto'
                                                 >
                                                     <Github className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                     <span>Github</span>
