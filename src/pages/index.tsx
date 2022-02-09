@@ -259,13 +259,13 @@ export default function _({ theme: _theme }: Props) {
 
                         <section className='font-semibold flex flex-col'>
                             <div className='flex flex-col gap-y-3 container mx-auto md:mt-20 py-24 px-8 md:px-24'>
-                                <span className='text-xl uppercase text-center lg:text-left text-[#a7aab7] dark:text-_light'>
+                                <span className='text-xl uppercase text-center lg:text-left text-[#979aa5] dark:text-_light'>
                                     Olá, eu sou
                                 </span>
                                 <h1 className='text-[#fc7a00] dark:text-_primary drop-shadow-[0_0_3px_#f17602] dark:drop-shadow-none text-6xl uppercase text-center lg:text-left'>
                                     iuri silva
                                 </h1>
-                                <h2 className='text-xl uppercase text-center lg:text-left text-[#a7aab7] dark:text-_light'>
+                                <h2 className='text-xl uppercase text-center lg:text-left text-[#979aa5] dark:text-_light'>
                                     Desenvolvedor Front-end & UI Designer.
                                 </h2>
                                 <div className='flex flex-col lg:flex-row gap-6 items-center mt-12'>
@@ -343,11 +343,11 @@ export default function _({ theme: _theme }: Props) {
                                         sobre mim
                                     </h2>
 
-                                    <span className='mb-5 font-medium text-xl mx-auto lg:mx-0 text-[#a7aab7] dark:text-_light'>
+                                    <span className='mb-5 font-medium text-xl mx-auto lg:mx-0 text-[#979aa5] dark:text-_light'>
                                         Guarantã, Brasil
                                     </span>
 
-                                    <p className='mb-10 font-light dark:text-_gray-light text-[#a7aab7] leading-[2] mx-auto lg:mx-0 text-center lg:text-left'>
+                                    <p className='mb-10 font-light dark:text-_gray-light text-[#979aa5] leading-[2] mx-auto lg:mx-0 text-center lg:text-left'>
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id
                                         egestas dui. Nullam finibus aliquam enim quis faucibus. Aenean ac
                                         commodo dolor, nec bibendum velit.
@@ -478,7 +478,7 @@ export default function _({ theme: _theme }: Props) {
                                                         <h3 className='text-2xl font-poppins font-bold mb-8 mx-auto lg:mx-0'>
                                                             {title}
                                                         </h3>
-                                                        <p className='font-light text-[#a7aab7] mb-7 text-center lg:text-left'>
+                                                        <p className='font-light text-[#979aa5] mb-7 text-center lg:text-left'>
                                                             {description}
                                                         </p>
                                                         <ul className='mb-8 flex gap-x-6 mx-auto lg:mx-0'>
