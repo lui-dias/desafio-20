@@ -31,7 +31,7 @@ export function BottomMenu({ theme, setTheme }: Props) {
     }, [])
 
     return (
-        <div className='bottom-menu fixed w-screen h-[7vh] bg-[#e6e9ed] dark:bg-_dark-200 top-full z-50 rounded-t-lg lg:hidden transition-[top_0.2s]'>
+        <div className='bottom-menu fixed w-screen h-[7vh] bg-[#f1f1f1] dark:bg-_dark-200 top-full z-50 rounded-t-lg lg:hidden transition-[top_0.2s-easeIn]'>
             <ul className='flex justify-around items-center w-full h-full px-4'>
                 <li onClick={() => setTheme(theme => (theme === 'light' ? 'dark' : 'light'))}>
                     {theme === 'light' ? (
