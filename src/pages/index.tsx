@@ -261,7 +261,10 @@ export default function _({ theme: _theme }: Props) {
 
                         <section className='font-semibold flex flex-col'>
                             <div className='flex flex-col gap-y-3 container mx-auto md:mt-20 py-24 px-8 md:px-24'>
-                                <span className='text-xl uppercase text-center lg:text-left text-[#979aa5] dark:text-_light'>
+                                <span
+                                    className='text-xl uppercase text-center lg:text-left text-[#979aa5] dark:text-_light'
+                                    onClick={() => console.log(window.screen.width * window.devicePixelRatio)}
+                                >
                                     Olá, eu sou
                                 </span>
                                 <h1 className='text-[#fc7a00] dark:text-_primary drop-shadow-[0_0_3px_#f17602] dark:drop-shadow-none text-6xl uppercase text-center lg:text-left'>
