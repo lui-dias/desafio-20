@@ -282,7 +282,7 @@ export default function _({ theme: _theme }: Props) {
                                             <Neumorph>
                                                 <a
                                                     href='#/'
-                                                    className='flex items-center gap-x-4 px-8 py-2 justify-center min-w-[275px] lg:w-auto'
+                                                    className='flex items-center gap-x-4 px-8 py-2 justify-center min-w-[275px] lg:min-w-fit'
                                                 >
                                                     <LinkedIn className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                     <span>LinkedIn</span>
@@ -291,7 +291,7 @@ export default function _({ theme: _theme }: Props) {
                                             <Neumorph>
                                                 <a
                                                     href='#/'
-                                                    className='flex items-center gap-x-4 px-8 py-2 justify-center min-w-[275px] lg:w-auto'
+                                                    className='flex items-center gap-x-4 px-8 py-2 justify-center min-w-[275px] lg:min-w-fit'
                                                 >
                                                     <Github className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                     <span>Github</span>
@@ -400,7 +400,7 @@ export default function _({ theme: _theme }: Props) {
                                                 <Neumorph>
                                                     <a
                                                         href='#/'
-                                                        className='flex items-center gap-x-4 px-8 py-3 justify-center min-w-[275px]'
+                                                        className='flex items-center gap-x-4 px-8 py-3 justify-center min-w-[275px] lg:min-w-fit'
                                                     >
                                                         <DownloadCloud className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                         <span>Currículo</span>
@@ -409,7 +409,7 @@ export default function _({ theme: _theme }: Props) {
                                                 <Neumorph>
                                                     <a
                                                         href='#/'
-                                                        className='flex items-center gap-x-4 px-8 py-3 justify-center min-w-[275px]'
+                                                        className='flex items-center gap-x-4 px-8 py-3 justify-center min-w-[275px] lg:min-w-fit'
                                                     >
                                                         <Email className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                         <span>E-mail</span>
