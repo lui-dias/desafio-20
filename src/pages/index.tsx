@@ -215,7 +215,7 @@ export default function _({ theme: _theme }: Props) {
             <NextSeo title='Desafio 20' description='Um lindo site feito para o desafio 20 do codelândia' />
             <div className={theme}>
                 <BottomMenu theme={theme} setTheme={setTheme} />
-                <div className='bg-gradient-to-t from-[#f7f8fa] to-[#e6e9ed] dark:from-_dark dark:to-_dark font-inter dark:text-_light flex flex-col min-h-screen overflow-hidden'>
+                <div className='bg-gradient-to-t from-[#fcfcfc] to-[#f3f3f3] dark:from-_dark dark:to-_dark font-inter dark:text-_light flex flex-col min-h-screen overflow-hidden'>
                     <header className='container flex justify-center lg:justify-between mx-auto font-medium md:px-24'>
                         <a
                             href='#/'
