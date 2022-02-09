@@ -170,9 +170,15 @@ export default function _({ theme: _theme }: Props) {
     const [theme, setTheme] = useState(_theme)
 
     useEffect(() => {
-        const w = window.screen.width * window.devicePixelRatio
+        const pageWidth = Math.max(
+            document.body.scrollWidth,
+            document.documentElement.scrollWidth,
+            document.body.offsetWidth,
+            document.documentElement.offsetWidth,
+            document.documentElement.clientWidth
+        )
 
-        if (w >= 1024) {
+        if (pageWidth >= 1024) {
             const interval = setInterval(() => {
                 setPrimary(primary => primary.rotate(1))
                 setSecondary(secondary => secondary.rotate(1))
@@ -261,20 +267,7 @@ export default function _({ theme: _theme }: Props) {
 
                         <section className='font-semibold flex flex-col'>
                             <div className='flex flex-col gap-y-3 container mx-auto md:mt-20 py-24 px-8 md:px-24'>
-                                <span
-                                    className='text-xl uppercase text-center lg:text-left text-[#979aa5] dark:text-_light'
-                                    onClick={() =>
-                                        alert(
-                                            Math.max(
-                                                document.body.scrollWidth,
-                                                document.documentElement.scrollWidth,
-                                                document.body.offsetWidth,
-                                                document.documentElement.offsetWidth,
-                                                document.documentElement.clientWidth
-                                            )
-                                        )
-                                    }
-                                >
+                                <span className='text-xl uppercase text-center lg:text-left text-[#979aa5] dark:text-_light'>
                                     Olá, eu sou
                                 </span>
                                 <h1 className='text-[#fc7a00] dark:text-_primary drop-shadow-[0_0_3px_#f17602] dark:drop-shadow-none text-6xl uppercase text-center lg:text-left'>
