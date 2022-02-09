@@ -254,7 +254,7 @@ export default function _({ theme: _theme }: Props) {
                         <Looper
                             primary={primary}
                             secondary={secondary}
-                            className='absolute w-[1020px] h-[600px] top-[350px] md:top-0 md:left-[clamp(400px,50%,1000px)] '
+                            className='absolute w-[1020px] h-[600px] top-[350px] md:top-0 md:left-[clamp(400px,50%,1000px)]'
                         />
 
                         <section className='font-semibold flex flex-col'>
@@ -268,7 +268,7 @@ export default function _({ theme: _theme }: Props) {
                                 <h2 className='text-xl uppercase text-center lg:text-left text-[#979aa5] dark:text-_light'>
                                     Desenvolvedor Front-end & UI Designer.
                                 </h2>
-                                <div className='flex flex-col lg:flex-row gap-6 items-center mt-12'>
+                                <div className='flex flex-col lg:flex-row gap-6 items-center mt-12 z-10'>
                                     {theme === 'light' ? (
                                         <>
                                             <Neumorph>
@@ -386,13 +386,13 @@ export default function _({ theme: _theme }: Props) {
                                         </li>
                                     </ul>
 
-                                    <div className='flex flex-col lg:flex-row gap-x-10 gap-y-6'>
+                                    <div className='flex flex-col lg:flex-row gap-x-10 gap-y-6 items-center'>
                                         {theme === 'light' ? (
                                             <>
                                                 <Neumorph>
                                                     <a
                                                         href='#/'
-                                                        className='flex items-center gap-x-4 px-8 py-3 max-w-[275px] justify-center w-full mx-auto lg:mx-0 lg:w-auto'
+                                                        className='flex items-center gap-x-4 px-8 py-3 justify-center min-w-[275px]'
                                                     >
                                                         <DownloadCloud className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                         <span>Currículo</span>
@@ -401,7 +401,7 @@ export default function _({ theme: _theme }: Props) {
                                                 <Neumorph>
                                                     <a
                                                         href='#/'
-                                                        className='flex items-center gap-x-4 px-8 py-3 max-w-[275px] justify-center w-full mx-auto lg:mx-0 lg:w-auto'
+                                                        className='flex items-center gap-x-4 px-8 py-3 justify-center min-w-[275px]'
                                                     >
                                                         <Email className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                         <span>E-mail</span>
