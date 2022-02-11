@@ -27,7 +27,7 @@ export function LooperProvider({ children }: { children: React.ReactNode }) {
     const [colorSpeed, setColorSpeed] = useState(1)
     const [primary, setPrimary] = useState(Color('#FF1CF7'))
     const [secondary, setSecondary] = useState(Color('#00F0FF'))
-    const [tick, setTick] = useState(1)
+    const [tick, setTick] = useState(10)
 
     return (
         <LooperContext.Provider
