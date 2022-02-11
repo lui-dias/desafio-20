@@ -1,5 +1,7 @@
 import Color from 'color'
 import dayjs from 'dayjs'
+import { useContext, useEffect } from 'react'
+import { LooperContext } from '../../contexts/Looper'
 
 type Props = React.SVGProps<SVGSVGElement> & {
     primary: Color
@@ -9,12 +11,8 @@ type Props = React.SVGProps<SVGSVGElement> & {
 // #FF1CF7
 // #00F0FF
 
-const speed = 0.025
-const delta = 20
-const delay = 85
-const data = Object.fromEntries([...Array(69)].map((_, i) => [i.toString(), { increment: true, n: 0 }]))
-const startTime = dayjs()
-
+let data = Object.fromEntries([...Array(69)].map((_, i) => [i.toString(), { increment: true, n: 0 }]))
+let startTime = dayjs()
 const { cos, PI } = Math
 
 function easeInOutSine(x: number): number {
@@ -27,34 +25,57 @@ function easing(easing: string) {
     }[easing]!
 }
 
-export function Looper({ primary, secondary, ...rest }: Props) {
+export function Looper(props: React.SVGProps<SVGSVGElement>) {
+    const { speed, delta, delay, colorSpeed, primary, secondary, tick, setPrimary } =
+        useContext(LooperContext)
+
     function editPrimary(_primary: Color) {
-        return (primary &&= primary.rotate(1)).hex()
+        return primary.hex()
     }
 
     function editSecondary(_secondary: Color) {
-        return (secondary &&= secondary.rotate(1)).hex()
+        return secondary.hex()
     }
 
     function transformPath(wait: number) {
         const millisecondsPassedFromStart = dayjs().diff(startTime)
 
-        if (millisecondsPassedFromStart < delay * wait) {
-            return
+        if (millisecondsPassedFromStart > delay * wait) {
+            const strN = wait.toString()
+            const d = data[strN]
+
+            d.increment ? (d.n += speed) : (d.n -= speed)
+
+            d.increment = d.n >= 0
+
+            return `translate(0, ${easing('easeInOutSine')(d.n) * delta}px)`
         }
-
-        const strN = wait.toString()
-        const d = data[strN]
-
-        d.increment ? (d.n += speed) : (d.n -= speed)
-
-        d.increment = d.n >= 0
-
-        return `translate(0, ${easing('easeInOutSine')(d.n) * delta}px)`
     }
 
+    useEffect(() => {
+        const pageWidth = Math.max(
+            document.body.scrollWidth,
+            document.documentElement.scrollWidth,
+            document.body.offsetWidth,
+            document.documentElement.offsetWidth,
+            document.documentElement.clientWidth
+        )
+
+        if (pageWidth >= 1024) {
+            const interval = setInterval(() => {
+                setPrimary(primary => primary.rotate(colorSpeed))
+            }, 100 / tick)
+            return () => clearInterval(interval)
+        }
+    }, [colorSpeed, setPrimary, speed, tick])
+
+    useEffect(() => {
+        startTime = dayjs()
+        data = Object.fromEntries([...Array(69)].map((_, i) => [i.toString(), { increment: true, n: 0 }]))
+    }, [speed, delta, delay])
+
     return (
-        <svg width={842} height={625} fill='none' {...rest}>
+        <svg width={842} height={625} fill='none' {...props}>
             <path
                 opacity={0.014}
                 d='M161.722 519.427L97.997 405.799a23.276 23.276 0 01-2.082-17.75l54.242-191.127a23.577 23.577 0 017.956-11.966L291.619 78.079c6.897-5.521 16.301-6.76 24.362-3.207l102.036 44.967a23.287 23.287 0 0113.893 20.067l9.091 169.719a23.41 23.41 0 01-3.66 13.859l-107.2 167.788a23.726 23.726 0 01-14.72 10.346l-127.95 29.156c-10.192 2.323-20.672-2.296-25.749-11.347z'

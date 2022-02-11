@@ -1,15 +1,8 @@
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { useEffect } from 'react'
 
-import { BsMoonStarsFill, BsFillSunFill } from 'react-icons/bs'
+import { ThemeSwitcher } from '../ThemeSwitcher'
 
-type Theme = 'light' | 'dark'
-
-type Props = {
-    theme: Theme
-    setTheme: Dispatch<SetStateAction<Theme>>
-}
-
-export function BottomMenu({ theme, setTheme }: Props) {
+export function BottomMenu() {
     useEffect(() => {
         const maxScrollY = document.documentElement.scrollHeight - document.documentElement.clientHeight
         const menu = document.querySelector('.bottom-menu') as any
@@ -33,12 +26,8 @@ export function BottomMenu({ theme, setTheme }: Props) {
     return (
         <div className='bottom-menu fixed w-screen h-[7vh] bg-[#f1f1f1] dark:bg-_dark-200 top-full z-50 rounded-t-lg lg:hidden transition-[top_0.2s-easeIn]'>
             <ul className='flex justify-around items-center w-full h-full px-4'>
-                <li onClick={() => setTheme(theme => (theme === 'light' ? 'dark' : 'light'))}>
-                    {theme === 'light' ? (
-                        <BsFillSunFill className='w-7 h-7 fill-[#fc7a00] drop-shadow-[0_0_2px_#F17602] dark:fill-_primary dark:drop-shadow-none' />
-                    ) : (
-                        <BsMoonStarsFill className='w-6 h-6 fill-[#fc7a00] drop-shadow-[0_0_2px_#F17602] dark:fill-_primary dark:drop-shadow-none' />
-                    )}
+                <li>
+                    <ThemeSwitcher />
                 </li>
             </ul>
         </div>
