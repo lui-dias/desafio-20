@@ -18,16 +18,29 @@ type Context = {
     setTick: Dispatch<SetStateAction<number>>
 }
 
+type Props = {
+    children: React.ReactNode
+    data: {
+        primary: string
+        secondary: string
+        speed: number
+        delta: number
+        delay: number
+        colorSpeed: number
+        tick: number
+    }
+}
+
 export const LooperContext = createContext({} as Context)
 
-export function LooperProvider({ children }: { children: React.ReactNode }) {
-    const [speed, setSpeed] = useState(0.025)
-    const [delta, setDelta] = useState(20)
-    const [delay, setDelay] = useState(85)
-    const [colorSpeed, setColorSpeed] = useState(1)
-    const [primary, setPrimary] = useState(Color('#FF1CF7'))
-    const [secondary, setSecondary] = useState(Color('#00F0FF'))
-    const [tick, setTick] = useState(10)
+export function LooperProvider({ children, data }: Props) {
+    const [primary, setPrimary] = useState(Color(data.primary))
+    const [secondary, setSecondary] = useState(Color(data.secondary))
+    const [speed, setSpeed] = useState(data.speed)
+    const [delta, setDelta] = useState(data.delta)
+    const [delay, setDelay] = useState(data.delay)
+    const [colorSpeed, setColorSpeed] = useState(data.colorSpeed)
+    const [tick, setTick] = useState(data.tick)
 
     return (
         <LooperContext.Provider

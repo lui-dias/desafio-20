@@ -32,6 +32,15 @@ import { LooperProvider } from '../contexts/Looper'
 
 type Props = {
     theme: 'light' | 'dark'
+    data: {
+        primary: string
+        secondary: string
+        speed: number
+        delta: number
+        delay: number
+        colorSpeed: number
+        tick: number
+    }
 }
 
 type Experience = {
@@ -156,16 +165,25 @@ const projects: Project[] = [
 ]
 
 export async function getServerSideProps(ctx: NextPageContext) {
-    const cookies = nookies.get(ctx)
+    let { theme, speed, delta, delay, colorSpeed, tick, primary, secondary } = nookies.get(ctx)
 
     return {
         props: {
-            theme: cookies.theme || 'light',
+            data: {
+                theme: theme || 'light',
+                speed: Number(speed || 0.025),
+                delta: Number(delta || 20),
+                delay: Number(delay || 85),
+                colorSpeed: Number(colorSpeed || 1),
+                tick: Number(tick || 5),
+                primary: primary || '#FF1CF7',
+                secondary: secondary || '#00F0FF',
+            },
         },
     }
 }
 
-export default function _({ theme: _theme }: Props) {
+export default function _({ theme: _theme, data }: Props) {
     const { theme, setTheme } = useContext(ThemeContext)
 
     useEffect(() => {
@@ -202,7 +220,7 @@ export default function _({ theme: _theme }: Props) {
             <NextSeo title='Desafio 20' description='Um lindo site feito para o desafio 20 do codelândia' />
             <div className={theme}>
                 <BottomMenu />
-                <LooperProvider>
+                <LooperProvider data={data}>
                     <div className='bg-gradient-to-t from-[#fcfcfc] to-[#f3f3f3] dark:from-_dark dark:to-_dark font-inter dark:text-_light flex flex-col min-h-screen overflow-hidden'>
                         <header className='container flex justify-center lg:justify-between mx-auto font-medium md:px-24'>
                             <a
@@ -236,7 +254,7 @@ export default function _({ theme: _theme }: Props) {
                                             Projetos
                                         </a>
                                     </li>
-                                    <span className='w-px h-6 bg-[#b8b3b3]'></span>
+                                    <span className='w-px h-6 bg-[#c9c4c4]'></span>
                                     <li>
                                         <ThemeSwitcher className='px-8 py-10' />
                                     </li>

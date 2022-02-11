@@ -2,11 +2,7 @@ import Color from 'color'
 import dayjs from 'dayjs'
 import { useContext, useEffect } from 'react'
 import { LooperContext } from '../../contexts/Looper'
-
-type Props = React.SVGProps<SVGSVGElement> & {
-    primary: Color
-    secondary: Color
-}
+import nookies from 'nookies'
 
 // #FF1CF7
 // #00F0FF
@@ -26,7 +22,7 @@ function easing(easing: string) {
 }
 
 export function Looper(props: React.SVGProps<SVGSVGElement>) {
-    const { speed, delta, delay, colorSpeed, primary, secondary, tick, setPrimary } =
+    const { speed, delta, delay, colorSpeed, primary, secondary, tick, setPrimary, setSecondary } =
         useContext(LooperContext)
 
     function editPrimary(_primary: Color) {
@@ -64,10 +60,11 @@ export function Looper(props: React.SVGProps<SVGSVGElement>) {
         if (pageWidth >= 1024) {
             const interval = setInterval(() => {
                 setPrimary(primary => primary.rotate(colorSpeed))
+                setSecondary(secondary => secondary.rotate(colorSpeed))
             }, 100 / tick)
             return () => clearInterval(interval)
         }
-    }, [colorSpeed, setPrimary, speed, tick])
+    }, [colorSpeed, setPrimary, setSecondary, tick])
 
     useEffect(() => {
         startTime = dayjs()
