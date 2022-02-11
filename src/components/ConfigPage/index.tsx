@@ -37,7 +37,7 @@ const Input = styled.input`
 `
 
 export function ConfigPage() {
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
 
     const { setSpeed, setDelta, setDelay, setColorSpeed, setTick } = useContext(LooperContext)
     const [receiverSpeed, senderSpeedProps] = useUpdateOnChange()
