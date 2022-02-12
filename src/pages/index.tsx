@@ -266,7 +266,7 @@ export default function _({ theme: _theme, data }: Props) {
                         </header>
 
                         <main className='relative mx-auto w-full'>
-                            <Looper className='absolute w-[1020px] h-[600px] top-[350px] md:top-0 md:left-[clamp(400px,50%,1000px)]' />
+                            <Looper className='absolute w-[1020px] h-[600px] top-[350px] lg:top-0 md:left-[400px] 2xl:left-[clamp(500px,50%,1000px)]' />
 
                             <section className='font-semibold flex flex-col'>
                                 <div className='flex flex-col gap-y-3 container mx-auto md:mt-20 py-24 px-8 md:px-24'>
