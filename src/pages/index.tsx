@@ -540,7 +540,7 @@ export default function _({ theme: _theme, data }: Props) {
                         </main>
 
                         <footer className='container mx-auto text-_gray-light'>
-                            <div className='flex flex-col lg:flex-row gap-y-6 items-center md:justify-between px-20 py-10'>
+                            <div className='flex flex-col lg:flex-row gap-y-6 items-center md:justify-between px-24 py-10'>
                                 <span>@ 2022 - Iuri Silva</span>
 
                                 <div className='flex gap-x-2 items-center whitespace-nowrap'>
