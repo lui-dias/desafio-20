@@ -1,34 +1,37 @@
 import { NextPageContext } from 'next'
-import Link from 'next/link'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 
 import dayjs, { Dayjs } from 'dayjs'
 import nookies from 'nookies'
 import { NextSeo } from 'next-seo'
 
-import { Looper } from '../components/Looper'
-import { GradientButton } from '../components/GradientButton'
-import { ExperiencesList } from '../components/Experiences'
-import { CustomImage } from '../components/CustomImage'
-
-import { Twitter } from '../components/svg/Twitter'
-import { Codepen } from '../components/svg/Codepen'
-import { Facebook } from '../components/svg/Facebook'
-import { Figma } from '../components/svg/Figma'
-import { Twitch } from '../components/svg/Twitch'
-import { Youtube } from '../components/svg/Youtube'
-import { LinkedIn } from '../components/svg/LinkedIn'
-import { Github } from '../components/svg/Github'
-import { DownloadCloud } from '../components/svg/DownloadCloud'
-import { Email } from '../components/svg/Email'
-import { SvgLink } from '../components/svg/SvgLink'
-import { LogoFooter } from '../components/svg/LogoFooter'
-import { Neumorph } from '../components/Neumorph'
-import { BottomMenu } from '../components/BottomMenu'
-import { ThemeSwitcher } from '../components/ThemeSwitcher'
-import { ConfigPage } from '../components/ConfigPage'
-import { ThemeContext } from '../contexts/ThemeSwitcher'
+import { Theme, ThemeContext } from '../contexts/ThemeSwitcher'
 import { LooperProvider } from '../contexts/Looper'
+
+import {
+    BottomMenu,
+    Button,
+    Codepen,
+    CustomImage,
+    DownloadCloud,
+    Email,
+    ExperiencesList,
+    Facebook,
+    Figma,
+    Form,
+    Github,
+    Header,
+    Input,
+    LinkedIn,
+    Looper,
+    SvgLink,
+    TextArea,
+    Twitch,
+    Twitter,
+    Youtube,
+} from '../components'
+import { Footer } from '../components/Footer'
+import { Dropdown } from '../components/Dropdown'
 
 type Props = {
     theme: 'light' | 'dark'
@@ -59,7 +62,6 @@ type Project = {
     description: string
     techs: string[]
     link: string
-    github: string
 }
 
 const experiences: Experience[] = [
@@ -133,7 +135,6 @@ const projects: Project[] = [
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus risus. Ut rutrum sollicitudin purus in accumsan. Proin at mattis metus. Nullam sit amet mauris condimentum, volutpat augue in, mattis urna.',
         techs: ['React', 'Typescript', 'Sass'],
         link: 'https://www.google.com',
-        github: 'https://www.google.com',
     },
     {
         img: 'https://via.placeholder.com/530x200',
@@ -142,7 +143,6 @@ const projects: Project[] = [
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus risus. Ut rutrum sollicitudin purus in accumsan. Proin at mattis metus. Nullam sit amet mauris condimentum, volutpat augue in, mattis urna.',
         techs: ['React', 'Typescript', 'Sass'],
         link: 'https://www.google.com',
-        github: 'https://www.google.com',
     },
     {
         img: 'https://via.placeholder.com/530x200',
@@ -151,7 +151,6 @@ const projects: Project[] = [
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus risus. Ut rutrum sollicitudin purus in accumsan. Proin at mattis metus. Nullam sit amet mauris condimentum, volutpat augue in, mattis urna.',
         techs: ['React', 'Typescript', 'Sass'],
         link: 'https://www.google.com',
-        github: 'https://www.google.com',
     },
     {
         img: 'https://via.placeholder.com/530x200',
@@ -160,31 +159,50 @@ const projects: Project[] = [
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus risus. Ut rutrum sollicitudin purus in accumsan. Proin at mattis metus. Nullam sit amet mauris condimentum, volutpat augue in, mattis urna.',
         techs: ['React', 'Typescript', 'Sass'],
         link: 'https://www.google.com',
-        github: 'https://www.google.com',
     },
 ]
 
+// prettier-ignore
 export async function getServerSideProps(ctx: NextPageContext) {
     let { theme, speed, delta, delay, colorSpeed, tick, primary, secondary } = nookies.get(ctx)
 
     return {
         props: {
             data: {
-                theme: theme || 'light',
-                speed: Number(speed || 0.025),
-                delta: Number(delta || 20),
-                delay: Number(delay || 85),
-                colorSpeed: Number(colorSpeed || 1),
-                tick: Number(tick || 5),
-                primary: primary || '#FF1CF7',
-                secondary: secondary || '#00F0FF',
+                theme:      theme || 'light',
+                speed:      Number(speed || 0.025),
+                delta:      Number(delta || 20),
+                delay:      Number(delay || 85),
+                colorSpeed: Number(colorSpeed || 0.25),
+                tick:       Number(tick || 5),
+                primary:    primary || '#FF1CF7',
+                secondary:  secondary || '#00F0FF',
             },
         },
     }
 }
 
-export default function _({ theme: _theme, data }: Props) {
+export default function _({ theme: getServerSidePropsTheme, data }: Props) {
     const { theme, setTheme } = useContext(ThemeContext)
+    const emailButtonDropdownRef = useRef<HTMLDivElement>(null)
+
+    const nameInputRef = useRef<HTMLInputElement>(null)
+    const contentInputRef = useRef<HTMLInputElement>(null)
+
+    function onSubmit(e: any) {
+        e.preventDefault()
+
+        const name = nameInputRef.current?.value
+        const content = contentInputRef.current?.value
+
+        console.log(name, content)
+    }
+
+    /*___________________________________________
+    ||
+    ||      Altera o tema ao apertar Alt + z
+    ||___________________________________________
+    */
 
     useEffect(() => {
         function a(e: any) {
@@ -199,15 +217,29 @@ export default function _({ theme: _theme, data }: Props) {
         }
     }, [setTheme])
 
-    useEffect(() => {
-        const theme = nookies.get(null).theme || 'light'
+    /*______________________________________________________________
+    ||
+    ||      Define o tema do site pelo tema definito no cookie
+    ||      Se o tema não existir no cookie
+    ||          |> Usa o tema recebido do getServerSideProps
+    ||______________________________________________________________
+    */
 
-        if (theme !== 'light' && theme !== 'dark') {
-            setTheme(_theme)
+    useEffect(() => {
+        const theme = (nookies.get(null).theme || 'light') as Theme
+
+        if (!['light', 'dark'].includes(theme)) {
+            setTheme(getServerSidePropsTheme)
         } else {
             setTheme(theme)
         }
-    }, [_theme, setTheme])
+    }, [getServerSidePropsTheme, setTheme])
+
+    /*_______________________________________________________________
+    ||
+    ||      Quando o tema é alterado, atualiza o tema no cookie
+    ||_______________________________________________________________
+    */
 
     useEffect(() => {
         nookies.set(null, 'theme', theme, {
@@ -220,53 +252,29 @@ export default function _({ theme: _theme, data }: Props) {
             <NextSeo title='Desafio 20' description='Um lindo site feito para o desafio 20 do codelândia' />
             <div className={theme}>
                 <BottomMenu />
+
                 <LooperProvider data={data}>
                     <div className='bg-gradient-to-t from-[#fcfcfc] to-[#f3f3f3] dark:from-_dark dark:to-_dark font-inter dark:text-_light flex flex-col min-h-screen overflow-hidden'>
-                        <header className='container flex justify-center lg:justify-between mx-auto font-medium md:px-24'>
-                            <a
-                                href='#/'
-                                className='text-[#878995] dark:text-_primary py-11 text-2xl hidden lg:block'
-                            >
-                                Portfólio
-                            </a>
+                        {/*
+                            ██   ██ ███████  █████  ██████  ███████ ██████
+                            ██   ██ ██      ██   ██ ██   ██ ██      ██   ██
+                            ███████ █████   ███████ ██   ██ █████   ██████
+                            ██   ██ ██      ██   ██ ██   ██ ██      ██   ██
+                            ██   ██ ███████ ██   ██ ██████  ███████ ██   ██
+                        */}
 
-                            <LogoFooter className='w-12 h-12 lg:hidden mt-8 fill-[#fc7a00] dark:fill-_primary' />
-
-                            <nav className='lg:flex items-center hidden'>
-                                <ul className='flex text-[#878995] dark:text-_gray-light items-center'>
-                                    <li>
-                                        <a href='#/' className='py-11 px-8'>
-                                            Home
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href='#about-me' className='py-11 px-8'>
-                                            Sobre mim
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href='#experience' className='py-11 px-8'>
-                                            Experiência
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href='#projects' className='py-11 px-8'>
-                                            Projetos
-                                        </a>
-                                    </li>
-                                    <span className='w-px h-6 bg-[#c9c4c4]'></span>
-                                    <li>
-                                        <ThemeSwitcher className='px-8 py-10' />
-                                    </li>
-                                    <li>
-                                        <ConfigPage />
-                                    </li>
-                                </ul>
-                            </nav>
-                        </header>
+                        <Header />
 
                         <main className='relative mx-auto w-full'>
                             <Looper className='absolute w-[1020px] h-[600px] top-[350px] lg:top-0 md:left-[400px] 2xl:left-[clamp(500px,50%,1000px)]' />
+
+                            {/*
+                                ██   ██ ███████ ██████   ██████
+                                ██   ██ ██      ██   ██ ██    ██
+                                ███████ █████   ██████  ██    ██
+                                ██   ██ ██      ██   ██ ██    ██
+                                ██   ██ ███████ ██   ██  ██████
+                            */}
 
                             <section className='font-semibold flex flex-col'>
                                 <div className='flex flex-col gap-y-3 container mx-auto md:mt-20 py-24 px-8 md:px-24'>
@@ -274,80 +282,40 @@ export default function _({ theme: _theme, data }: Props) {
                                         Olá, eu sou
                                     </span>
                                     <h1 className='text-[#fc7a00] dark:text-_primary drop-shadow-[0_0_3px_#f17602] dark:drop-shadow-none text-6xl uppercase text-center lg:text-left'>
-                                        iuri silva
+                                        Iuri Silva
                                     </h1>
                                     <h2 className='text-xl uppercase text-center lg:text-left text-[#979aa5] dark:text-_light'>
                                         Desenvolvedor Front-end & UI Designer.
                                     </h2>
-                                    <div className='flex flex-col lg:flex-row gap-6 items-center mt-12 z-10'>
-                                        {theme === 'light' ? (
-                                            <>
-                                                <Neumorph>
-                                                    <a
-                                                        href='#/'
-                                                        className='flex items-center gap-x-4 px-8 py-2 justify-center min-w-[275px] lg:min-w-fit'
-                                                    >
-                                                        <LinkedIn className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                        <span>LinkedIn</span>
-                                                    </a>
-                                                </Neumorph>
-                                                <Neumorph>
-                                                    <a
-                                                        href='#/'
-                                                        className='flex items-center gap-x-4 px-8 py-2 justify-center min-w-[275px] lg:min-w-fit'
-                                                    >
-                                                        <Github className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                        <span>Github</span>
-                                                    </a>
-                                                </Neumorph>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <GradientButton
-                                                    href='#/'
-                                                    className='flex gap-x-4 px-8 py-2 w-full justify-center max-w-[275px] lg:w-auto'
-                                                    gradient='var(--gradient-purple-from), var(--gradient-purple-to)'
-                                                >
-                                                    <LinkedIn className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                    <span>LinkedIn</span>
-                                                </GradientButton>
-                                                <GradientButton
-                                                    href='#/'
-                                                    className='flex items-center gap-x-4 px-8 py-2 w-full justify-center max-w-[275px] lg:w-auto'
-                                                    gradient='var(--gradient-purple-from), var(--gradient-purple-to)'
-                                                    duration={15}
-                                                    rotateNegative
-                                                >
-                                                    <Github className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                    <span>Github</span>
-                                                </GradientButton>
-                                            </>
-                                        )}
+
+                                    <div className='flex flex-col lg:flex-row gap-y-6 gap-x-6 mt-12 w-[275px] mx-auto lg:mx-0'>
+                                        <Button to='https://www.linkedin.com/in/luigi-dias-20133a225/'>
+                                            <LinkedIn className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
+                                            <span>LinkedIn</span>
+                                        </Button>
+                                        <Button to='https://github.com/lui-dias'>
+                                            <Github className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
+                                            <span>Github</span>
+                                        </Button>
                                     </div>
                                 </div>
                             </section>
 
+                            {/*
+                                 █████  ██████   ██████  ██    ██ ████████     ███    ███ ███████
+                                ██   ██ ██   ██ ██    ██ ██    ██    ██        ████  ████ ██
+                                ███████ ██████  ██    ██ ██    ██    ██        ██ ████ ██ █████
+                                ██   ██ ██   ██ ██    ██ ██    ██    ██        ██  ██  ██ ██
+                                ██   ██ ██████   ██████   ██████     ██        ██      ██ ███████
+                            */}
+
                             <section id='about-me' className='dark:bg-_dark-200'>
                                 <div className='container mx-auto flex flex-col lg:flex-row justify-between mt-20 md:mt-60 px-8 md:px-24 py-24'>
-                                    {theme === 'light' ? (
-                                        <Neumorph
-                                            className='w-full max-w-[350px] h-[350px] mx-auto lg:mx-0'
-                                            disableClickEffect
-                                            disablePressEffect
-                                        >
-                                            <CustomImage
-                                                src='https://via.placeholder.com/350x350'
-                                                alt='Me'
-                                                className='w-full h-full'
-                                            />
-                                        </Neumorph>
-                                    ) : (
-                                        <CustomImage
-                                            src='https://via.placeholder.com/350x350'
-                                            alt='Me'
-                                            className='w-full max-w-[350px] h-[350px] mx-auto lg:mx-0'
-                                        />
-                                    )}
+                                    <CustomImage
+                                        src='https://via.placeholder.com/350x350'
+                                        alt='Me'
+                                        className='w-full max-w-[350px] h-[350px] mx-auto lg:mx-0'
+                                    />
 
                                     <div className='flex flex-col lg:w-[40%]'>
                                         <h2 className='uppercase mb-10 text-2xl mt-10 mx-auto lg:mx-0 text-[#878995] dark:text-_light'>
@@ -397,54 +365,30 @@ export default function _({ theme: _theme, data }: Props) {
                                             </li>
                                         </ul>
 
-                                        <div className='flex flex-col lg:flex-row gap-x-10 gap-y-6 items-center'>
-                                            {theme === 'light' ? (
-                                                <>
-                                                    <Neumorph>
-                                                        <a
-                                                            href='#/'
-                                                            className='flex items-center gap-x-4 px-8 py-3 justify-center min-w-[275px] lg:min-w-fit'
-                                                        >
-                                                            <DownloadCloud className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                            <span>Currículo</span>
-                                                        </a>
-                                                    </Neumorph>
-                                                    <Neumorph>
-                                                        <a
-                                                            href='#/'
-                                                            className='flex items-center gap-x-4 px-8 py-3 justify-center min-w-[275px] lg:min-w-fit'
-                                                        >
-                                                            <Email className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                            <span>E-mail</span>
-                                                        </a>
-                                                    </Neumorph>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <GradientButton
-                                                        href='#/'
-                                                        className='flex items-center gap-x-4 px-8 py-3 max-w-[275px] justify-center w-full mx-auto lg:mx-0 lg:w-auto'
-                                                        gradient='var(--gradient-purple-from), var(--gradient-purple-to)'
-                                                    >
-                                                        <DownloadCloud className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                        <span>Currículo</span>
-                                                    </GradientButton>
-                                                    <GradientButton
-                                                        href='#/'
-                                                        className='flex items-center gap-x-4 px-8 py-3 max-w-[275px] justify-center w-full mx-auto lg:mx-0 lg:w-auto whitespace-nowrap'
-                                                        gradient='var(--gradient-purple-from), var(--gradient-purple-to)'
-                                                        duration={15}
-                                                        rotateNegative
-                                                    >
-                                                        <Email className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                        <span>E-mail</span>
-                                                    </GradientButton>
-                                                </>
-                                            )}
+                                        <div className='flex flex-col lg:flex-row gap-x-10 gap-y-6 items-center w-[275px] mx-auto'>
+                                            <Button to='/Curriculo.pdf' filename='Curriculo__Luigi.pdf'>
+                                                <DownloadCloud className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
+                                                <span>Currículo</span>
+                                            </Button>
+
+                                            <Dropdown>
+                                                <Button>
+                                                    <Email className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
+                                                    <span>E-mail</span>
+                                                </Button>
+                                            </Dropdown>
                                         </div>
                                     </div>
                                 </div>
                             </section>
+
+                            {/*
+                                ███████ ██   ██ ██████  ███████ ██████  ██ ███████ ███    ██  ██████ ███████
+                                ██       ██ ██  ██   ██ ██      ██   ██ ██ ██      ████   ██ ██      ██
+                                █████     ███   ██████  █████   ██████  ██ █████   ██ ██  ██ ██      █████
+                                ██       ██ ██  ██      ██      ██   ██ ██ ██      ██  ██ ██ ██      ██
+                                ███████ ██   ██ ██      ███████ ██   ██ ██ ███████ ██   ████  ██████ ███████
+                            */}
 
                             <section id='experience'>
                                 <div className='container mx-auto py-24 px-8 md:px-24'>
@@ -456,99 +400,78 @@ export default function _({ theme: _theme, data }: Props) {
                                 </div>
                             </section>
 
+                            {/*
+                                ██████  ██████   ██████       ██ ███████  ██████ ████████ ███████
+                                ██   ██ ██   ██ ██    ██      ██ ██      ██         ██    ██
+                                ██████  ██████  ██    ██      ██ █████   ██         ██    ███████
+                                ██      ██   ██ ██    ██ ██   ██ ██      ██         ██         ██
+                                ██      ██   ██  ██████   █████  ███████  ██████    ██    ███████
+                            */}
+
                             <section id='projects' className='dark:bg-_dark-200'>
                                 <div className='container mx-auto px-8 py-24 md:px-24'>
-                                    <h2 className='uppercase mb-8 text-[#878995]'>Projetos</h2>
+                                    <h2 className='uppercase mb-8 text-[#878995] dark:text-_light'>
+                                        Projetos
+                                    </h2>
 
                                     <nav>
                                         <ul className='grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-32'>
-                                            {projects.map(
-                                                ({ img, title, description, link, techs, github }, index) => (
-                                                    <li key={title}>
-                                                        {theme === 'light' ? (
-                                                            <Neumorph
-                                                                className='max-w-[530px] h-[200px]'
-                                                                disableClickEffect
-                                                                disablePressEffect
-                                                            >
-                                                                <CustomImage
-                                                                    src={img}
-                                                                    alt={title}
-                                                                    className='w-full h-full'
-                                                                />
-                                                            </Neumorph>
-                                                        ) : (
-                                                            <CustomImage
-                                                                src={img}
-                                                                alt={title}
-                                                                className='w-full max-w-[530px] h-[200px]'
-                                                            />
-                                                        )}
+                                            {projects.map(({ img, title, description, link, techs }) => (
+                                                <li key={title}>
+                                                    <CustomImage
+                                                        src={img}
+                                                        alt={title}
+                                                        className='w-full max-w-[530px] h-[200px]'
+                                                    />
 
-                                                        <div className='flex flex-col items-start mt-10 mx-auto lg:mx-0'>
-                                                            <h3 className='text-2xl font-poppins font-bold mb-8 mx-auto lg:mx-0'>
-                                                                {title}
-                                                            </h3>
-                                                            <p className='font-light text-[#979aa5] mb-7 text-center lg:text-left'>
-                                                                {description}
-                                                            </p>
-                                                            <ul className='mb-8 flex gap-x-6 mx-auto lg:mx-0'>
-                                                                {techs.map(tech => (
-                                                                    <li
-                                                                        key={tech}
-                                                                        className='font-medium text-sm dark:text-_primary text-[#fc7a00] drop-shadow-[0_0_2px_#f1a45b] dark:drop-shadow-none'
-                                                                    >
-                                                                        {tech}
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                            {theme === 'light' ? (
-                                                                <Neumorph className='mx-auto lg:mx-0 w-full lg:w-auto max-w-[250px]'>
-                                                                    <Link href={link} passHref>
-                                                                        <a
-                                                                            target='_blank'
-                                                                            rel='noopener noreferrer'
-                                                                            className='flex gap-x-4 px-8 py-3 w-full justify-center'
-                                                                        >
-                                                                            <SvgLink className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                                            <span>Visualizar</span>
-                                                                        </a>
-                                                                    </Link>
-                                                                </Neumorph>
-                                                            ) : (
-                                                                <GradientButton
-                                                                    href={link}
-                                                                    gradient='var(--gradient-purple-from),var(--gradient-purple-to)'
-                                                                    duration={
-                                                                        index % 2 === 0 ? 15 : undefined
-                                                                    }
-                                                                    rotateNegative={index % 2 === 0}
-                                                                    className='mx-auto lg:mx-0 w-full lg:w-auto max-w-[250px] flex justify-center'
+                                                    <div className='flex flex-col items-center lg:items-start mt-10 mx-auto lg:mx-0'>
+                                                        <h3 className='text-2xl font-poppins font-bold mb-8 mx-auto lg:mx-0'>
+                                                            {title}
+                                                        </h3>
+                                                        <p className='font-light text-[#979aa5] mb-7 text-center lg:text-left'>
+                                                            {description}
+                                                        </p>
+                                                        <ul className='mb-8 flex gap-x-6 mx-auto lg:mx-0'>
+                                                            {techs.map(tech => (
+                                                                <li
+                                                                    key={tech}
+                                                                    className='font-medium text-sm dark:text-_primary text-[#fc7a00] drop-shadow-[0_0_2px_#f1a45b] dark:drop-shadow-none'
                                                                 >
-                                                                    <SvgLink className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
-                                                                    <span>Visualizar</span>
-                                                                </GradientButton>
-                                                            )}
-                                                        </div>
-                                                    </li>
-                                                )
-                                            )}
+                                                                    {tech}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                        <Button to={link} className='mx-auto lg:mx-0'>
+                                                            <SvgLink className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
+                                                            <span>Visualizar</span>
+                                                        </Button>
+                                                    </div>
+                                                </li>
+                                            ))}
                                         </ul>
                                     </nav>
                                 </div>
                             </section>
+
+                            {/*
+                                ██████  ██████  ███    ██ ████████  █████   ██████ ████████
+                                ██      ██    ██ ████   ██    ██    ██   ██ ██         ██
+                                ██      ██    ██ ██ ██  ██    ██    ███████ ██         ██
+                                ██      ██    ██ ██  ██ ██    ██    ██   ██ ██         ██
+                                ██████  ██████   ██   ████    ██    ██   ██  ██████    ██
+                            */}
+
+                            <section id='contact'>
+                                <Form onSubmit={onSubmit}>
+                                    <Input placeholder='Nome' ref={nameInputRef} required />
+
+                                    <TextArea placeholder='Digite a mensagem' ref={contentInputRef} />
+                                    <Button>Enviar</Button>
+                                </Form>
+                            </section>
                         </main>
 
-                        <footer className='container mx-auto text-_gray-light'>
-                            <div className='flex flex-col lg:flex-row gap-y-6 items-center md:justify-between px-24 py-10'>
-                                <span>@ 2022 - Iuri Silva</span>
-
-                                <div className='flex gap-x-2 items-center whitespace-nowrap'>
-                                    Powered by
-                                    <LogoFooter className='fill-[#fc7a00] dark:fill-_primary drop-shadow-[0_0_2px_#F17602] dark:drop-shadow-none w-6 h-6' />
-                                </div>
-                            </div>
-                        </footer>
+                        <Footer />
                     </div>
                 </LooperProvider>
             </div>

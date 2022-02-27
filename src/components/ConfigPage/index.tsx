@@ -158,8 +158,8 @@ export function ConfigPage() {
                     disableClickEffect
                     disablePressEffect
                     className={`${
-                        isOpen ? 'absolute' : 'hidden'
-                    } absolute bg-slate-700 rounded p-6 z-50 top-[calc(100%+10px)] w-48 left-[calc(-96px+16px)]`}
+                        !isOpen && 'opacity-0 pointer-events-none'
+                    } absolute bg-slate-700 rounded p-6 z-50 top-[calc(100%+10px)] w-48 left-[calc(-96px+16px)] transition-all duration-300 ease-in-out`}
                 >
                     <div className='flex flex-col text-_light gap-y-5'>
                         <span className='text-[#878995] relative after:absolute after:w-full after:h-px after:bg-[#c2c3ce] after:top-[calc(100%+8px)] after:left-0'>
@@ -236,8 +236,8 @@ export function ConfigPage() {
                             <Input
                                 {...senderColorSpeedProps}
                                 type='range'
-                                max={10}
-                                step={1}
+                                max={5}
+                                step={0.25}
                                 defaultValue={colorSpeed}
                                 onMouseUp={(e: any) => {
                                     setColorSpeed(parseFloat(e.target.value))

@@ -9,7 +9,7 @@ type Props = {
 export function CustomImage({ src, alt, className }: Props) {
     return (
         <div className={`relative object-cover select-none ${className || ''}`}>
-            <Image src={src} alt={alt} layout='fill' />
+            <Image src={src} alt={alt} layout='fill' priority />
         </div>
     )
 }
