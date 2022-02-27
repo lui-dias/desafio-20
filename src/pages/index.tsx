@@ -134,7 +134,7 @@ const projects: Project[] = [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus risus. Ut rutrum sollicitudin purus in accumsan. Proin at mattis metus. Nullam sit amet mauris condimentum, volutpat augue in, mattis urna.',
         techs: ['React', 'Typescript', 'Sass'],
-        link: 'https://www.google.com',
+        link: '#/',
     },
     {
         img: 'https://via.placeholder.com/530x200',
@@ -142,7 +142,7 @@ const projects: Project[] = [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus risus. Ut rutrum sollicitudin purus in accumsan. Proin at mattis metus. Nullam sit amet mauris condimentum, volutpat augue in, mattis urna.',
         techs: ['React', 'Typescript', 'Sass'],
-        link: 'https://www.google.com',
+        link: '#/',
     },
     {
         img: 'https://via.placeholder.com/530x200',
@@ -150,7 +150,7 @@ const projects: Project[] = [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus risus. Ut rutrum sollicitudin purus in accumsan. Proin at mattis metus. Nullam sit amet mauris condimentum, volutpat augue in, mattis urna.',
         techs: ['React', 'Typescript', 'Sass'],
-        link: 'https://www.google.com',
+        link: '#/',
     },
     {
         img: 'https://via.placeholder.com/530x200',
@@ -158,7 +158,7 @@ const projects: Project[] = [
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus risus. Ut rutrum sollicitudin purus in accumsan. Proin at mattis metus. Nullam sit amet mauris condimentum, volutpat augue in, mattis urna.',
         techs: ['React', 'Typescript', 'Sass'],
-        link: 'https://www.google.com',
+        link: '#/',
     },
 ]
 
