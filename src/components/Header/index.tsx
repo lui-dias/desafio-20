@@ -2,7 +2,7 @@ import { ConfigPage, Logo, ThemeSwitcher } from '..'
 
 const links = [
     { to: '/', text: 'Home' },
-    { to: '#about', text: 'Sobre' },
+    { to: '#about-me', text: 'Sobre' },
     { to: '#experiences', text: 'Experiências' },
     { to: '#projects', text: 'Projetos' },
     { to: '#contact', text: 'Contato' },

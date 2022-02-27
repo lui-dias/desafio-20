@@ -390,7 +390,7 @@ export default function _({ theme: getServerSidePropsTheme, data }: Props) {
                                 ███████ ██   ██ ██      ███████ ██   ██ ██ ███████ ██   ████  ██████ ███████
                             */}
 
-                            <section id='experience'>
+                            <section id='experiences'>
                                 <div className='container mx-auto py-24 px-8 md:px-24'>
                                     <h2 className='uppercase mb-7 text-[#878995] dark:text-_light'>
                                         Experiência
