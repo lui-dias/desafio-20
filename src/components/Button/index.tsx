@@ -83,7 +83,7 @@ export function Button({ children, to, className, insideClassName, filename }: P
         } else {
             return (
                 <GradientButton
-                    className={`flex justify-center items-center max-w-[275px] py-2 px-12 ${insideClassName}`}
+                    className={`flex justify-center items-center max-w-[275px] gap-x-4 py-2 px-12 ${insideClassName}`}
                     gradient='var(--gradient-purple-from), var(--gradient-purple-to)'
                 >
                     {children}
