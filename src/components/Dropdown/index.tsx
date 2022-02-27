@@ -40,9 +40,9 @@ export function Dropdown({ children }: Props) {
                 ref={ref}
                 className={`${
                     isOpen ? '' : 'opacity-0 pointer-events-none'
-                } absolute transition-all duration-200 left-0 top-0 bg-white p-4 rounded-lg flex flex-col gap-y-4`}
+                } absolute transition-all duration-200 left-0 top-0 bg-white p-4 rounded-lg flex flex-col gap-y-4 dark:bg-gray-800`}
             >
-                <div className='flex items-center gap-x-2 border-2 border-gray-300 pl-2'>
+                <div className='flex items-center gap-x-2 border-2 border-gray-300 dark:border-gray-600 pl-2'>
                     <span>luigidias@protonmail.com</span>
                     <button
                         type='button'
@@ -50,7 +50,7 @@ export function Dropdown({ children }: Props) {
                             navigator.clipboard.writeText('luigidias@protonmail.com')
                             setCopied(true)
                         }}
-                        className='p-2 bg-blue-300'
+                        className='p-2 bg-gray-300 dark:bg-gray-600'
                     >
                         {copied ? <Tick className='w-6 h-6' /> : <MdContentCopy className='w-6 h-6' />}
                     </button>
