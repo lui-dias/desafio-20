@@ -252,7 +252,16 @@ export default function _({ theme: getServerSidePropsTheme, data }: Props) {
                 title='Desafio 20'
                 description='Um lindo site feito para o desafio 20 do codelândia'
                 openGraph={{
-                    images: [{ url: 'https://desafio-20-peach.vercel.app/og-image.png', width: 1253, height: 630, alt: 'Site image preview' }],
+                    type: 'website',
+                    url: 'https://desafio-20-peach.vercel.app/',
+                    images: [
+                        {
+                            url: 'https://desafio-20-peach.vercel.app/og-image.png',
+                            width: 1253,
+                            height: 630,
+                            alt: 'Site image preview',
+                        },
+                    ],
                 }}
             />
             <div className={theme}>
