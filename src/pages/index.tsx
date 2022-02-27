@@ -365,7 +365,7 @@ export default function _({ theme: getServerSidePropsTheme, data }: Props) {
                                             </li>
                                         </ul>
 
-                                        <div className='flex flex-col lg:flex-row gap-x-10 gap-y-6 items-center w-[275px] mx-auto'>
+                                        <div className='flex flex-col lg:flex-row gap-x-10 gap-y-6 w-[275px] items-center mx-auto lg:mx-0 lg:w-auto'>
                                             <Button to='/Curriculo.pdf' filename='Curriculo__Luigi.pdf'>
                                                 <DownloadCloud className='w-6 h-6 select-none stroke-_dark dark:stroke-_light' />
                                                 <span>Currículo</span>
