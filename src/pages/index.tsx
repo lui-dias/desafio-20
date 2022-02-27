@@ -184,7 +184,6 @@ export async function getServerSideProps(ctx: NextPageContext) {
 
 export default function _({ theme: getServerSidePropsTheme, data }: Props) {
     const { theme, setTheme } = useContext(ThemeContext)
-    const emailButtonDropdownRef = useRef<HTMLDivElement>(null)
 
     const nameInputRef = useRef<HTMLInputElement>(null)
     const contentInputRef = useRef<HTMLInputElement>(null)
@@ -249,7 +248,13 @@ export default function _({ theme: getServerSidePropsTheme, data }: Props) {
 
     return (
         <>
-            <NextSeo title='Desafio 20' description='Um lindo site feito para o desafio 20 do codelândia' />
+            <NextSeo
+                title='Desafio 20'
+                description='Um lindo site feito para o desafio 20 do codelândia'
+                openGraph={{
+                    images: [{ url: '/og-image.png', width: 1253, height: 630, alt: 'Site image preview' }],
+                }}
+            />
             <div className={theme}>
                 <BottomMenu />
 
